@@ -1,11 +1,7 @@
 function calculateAge(form){
-    //Convert from milliseconds to days
-    var oneDay = 1000 * 3600 * 24;
-
     var day = form.day.value;
     var month = form.month.value;
     var year = form.year.value;
-
 
     var dob = new Date(year, month -1, day); 
     var dateNow = new Date();
@@ -21,25 +17,26 @@ function calculateAge(form){
     var ageInYears = dateDiff.getFullYear() - 1970;
     var ageInMonths = dateDiff.getMonth();
     var ageInDays = dateDiff.getDate() - 1;
-    console.log(dateDiff);
-    console.log(ageInYears);
-    console.log(ageInMonths);
-    console.log(ageInDays);
 
     if (ageInDays < 0){
-        document.getElementById("output").innerHTML = 'I don\'t believe you!';
+        var outputText = document.createTextNode('I don\'t believe you!');
+        outputText.appendChild(output);
         return 'Invalid date'
     }
 
     var multDays = (ageInDays != 1)?('s'):('')
-    console.log(multDays)
     var multMonths =  (ageInMonths != 1)?('s'):('')
     var multYears = (ageInYears != 1)?('s'):('')
 
     var age = 'You are ' + ageInYears + ' year'+  multYears + ' ' + ageInMonths + ' month' + multMonths + ' and ' + ageInDays + ' day' + multDays + ' old.' ;
     
-    document.getElementById("output").innerHTML = age;
-    console.log(age);
+    var output = document.getElementById("output");
+    if (output.childNodes.length > 0 ){
+        output.removeChild(output.childNodes[0]);
+    }
+    
+    var outputText = document.createTextNode(age);
+    output.appendChild(outputText);
     return 'Age updated'
     
 
