@@ -4,6 +4,7 @@
 <head>
     <script src="script.js"></script>
     <title> How old am I?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
 </head>
 
@@ -13,13 +14,24 @@
     <h2>Enter your date of birth to find out exactly how old you are!</h2>
 
     <form name="ageform" action="" method="GET">
-        <div class="container">
-        <input type="text" name="day" placeholder="DD">
-        <input type="text" name="month" placeholder="MM">
-        <input type="text" name="year" placeholder="YYYY">
-        <!-- maybe add an id-->
-        <input type="button" name="submitButton" value="Click" onclick="calculateAge(this.form)">
+        <div class = "formContainer">
+        <div class = "container">
+            <input type = "text" name = "day"   placeholder = "DD">
+            <input type = "text" name = "month" placeholder = "MM">
+            <input type = "text" name = "year"  placeholder = "YYYY">
+            <input type="button" name="submitButton" value="Submit" onclick="calculateAge(this.form)">
         </div>
+
+        <div class= "radioContainer"> 
+            <input type = "radio" name="unit" id = "years" value="years" checked>
+            <label for="years">Years</label>
+            <input type = "radio" name="unit" id = "months" value="months">
+            <label for="months">Months</label>
+            <input type = "radio" name="unit" id = "days" value="days">
+            <label for="days">Days</label>
+        </div>
+        </div>
+        
     </form>
 
     <p id="output"></p>

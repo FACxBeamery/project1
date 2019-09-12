@@ -13,9 +13,6 @@ function calculateAge(form){
         return
     }
 
-    if (dob.getFullYear() % 4 != 0){
-        ageInDays--
-    }
 
     var dateDiff = new Date(dateNow.getTime() - dob.getTime());
 
