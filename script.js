@@ -19,15 +19,20 @@ function calculateAge(form){
         return 
     }
 
-    var image = document.getElementById("cartoon")
+    var images = document.getElementsByClassName("cartoon")
     if ((dob.getMonth()==dateNow.getMonth()) && (dob.getDate()==dateNow.getDate())){ // birthday
-        image.src = "img/birthday.png";
-        image.alt = "An image of a birthday cake"
+        for (var i = 0; i < images.length; i++){
+            images[i].src = "img/birthday.png";
+            images[i].alt = "An image of a birthday cake"
+        }
+
     }
 
     else { // normal day
-        image.src = "img/question.png";
-        image.alt = "An image of a question mark"
+        for (var i = 0; i < images.length; i++){
+            images[i].src = "img/question.png";
+            images[i].alt = "An image of a question mark"
+        }
     }
 
     // find which box is checked:
@@ -63,7 +68,7 @@ function calculateAge(form){
 }
 
 function messageWriter(str, col){
-    var image = document.getElementById("cartoon")
+    var images = document.getElementsByClassName("cartoon")
     var output = document.getElementById("output");
     if (output.childNodes.length > 0 ){
         output.removeChild(output.childNodes[0]);
@@ -73,8 +78,10 @@ function messageWriter(str, col){
     output.style.color = col
 
     if (col == '#F00'){
-        image.src = "img/confused.png";
-        image.alt = "An image of a confused face"
+        for (var i = 0; i < images.length; i++){
+            images[i].src = "img/confused.png";
+            images[i].alt = "An image of a confused face"
+        }
     }
     return
 }

@@ -25,14 +25,29 @@ label {
 }
 
 img {
-    width: 20vw;
+    width: 15vw;
     display: block;
     margin: auto;
 }
 
+header {
+    display:flex;
+}
+
 footer{
+    position:absolute;
     font-size:1vw;
     text-align:center;
+    bottom: 5px;
+}
+
+.hidden{
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
 }
 .container{
     display: flex;
