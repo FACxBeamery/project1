@@ -22,7 +22,7 @@ function calculateAge(form){
     var images = document.getElementsByClassName("cartoon")
     if ((dob.getMonth()==dateNow.getMonth()) && (dob.getDate()==dateNow.getDate())){ // birthday
         for (var i = 0; i < images.length; i++){
-            images[i].src = "img/birthday.png";
+            images[i].src = "img/birthday.svg";
             images[i].alt = "An image of a birthday cake"
         }
 
@@ -30,7 +30,7 @@ function calculateAge(form){
 
     else { // normal day
         for (var i = 0; i < images.length; i++){
-            images[i].src = "img/question.png";
+            images[i].src = "img/question.svg";
             images[i].alt = "An image of a question mark"
         }
     }
