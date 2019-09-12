@@ -21,12 +21,12 @@ function calculateAge(form){
 
     var image = document.getElementById("cartoon")
     if ((dob.getMonth()==dateNow.getMonth()) && (dob.getDate()==dateNow.getDate())){ // birthday
-        image.src = "img/birthday.png";
+        image.src = "img/birthday.svg";
         image.alt = "An image of a birthday cake"
     }
 
     else { // normal day
-        image.src = "img/question.png";
+        image.src = "img/question.svg";
         image.alt = "An image of a question mark"
     }
 
@@ -74,7 +74,7 @@ function messageWriter(str, error){ // change col to error boolean
 
     if (error){
         output.style.color = '#F00'
-        image.src = "img/confused.png";
+        image.src = "img/confused.svg";
         image.alt = "An image of a confused face"
         var lengthText = document.getElementById("lengthText")
 
