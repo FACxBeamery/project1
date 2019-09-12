@@ -1,3 +1,4 @@
+const MS_TO_DAYS = 1000 * 60 * 60 * 24
 function calculateAge(form){
     var day = form.day.value;
     var month = form.month.value;
@@ -6,44 +7,52 @@ function calculateAge(form){
     var dob = new Date(year, month -1, day); 
     var dateNow = new Date();
 
-    
-   
     if ((dob.getFullYear() != year) || (dob.getMonth() != month - 1) || (dob.getDate() != day)){
         messageWriter('Please enter a valid date!', '#F00');
         return
     }
-
-
-    var dateDiff = new Date(dateNow.getTime() - dob.getTime());
-
-    var ageInYears = dateDiff.getFullYear() - 1970;
-    var ageInMonths = dateDiff.getMonth();
-    var ageInDays = dateDiff.getDate();
-
-
-
-    if (dateDiff < 0){
+    
+    var dateDiff = new Date(dateNow.getTime() - dob.getTime())
+    console.log(dateDiff)
+    if (dateDiff < 0){ // DOB in future
         messageWriter('I don\'t believe you!', '#F00');
         return 
     }
 
-    var multDays = (ageInDays != 1)?('s'):('')
-    var multMonths =  (ageInMonths != 1)?('s'):('')
-    var multYears = (ageInYears != 1)?('s'):('')
-
-    var age = 'You are ' + ageInYears + ' year'+  multYears + ' ' + ageInMonths + ' month' + multMonths + ' and ' + ageInDays + ' day' + multDays + ' old.' ;
-    
-    messageWriter(age, '#FFF');
-
     var image = document.getElementById("cartoon")
-    if ((dob.getMonth()==dateNow.getMonth()) && (dob.getDate()==dateNow.getDate())){
+    if ((dob.getMonth()==dateNow.getMonth()) && (dob.getDate()==dateNow.getDate())){ // birthday
         image.src = "img/birthday.png";
     }
 
-    else {
+    else { // normal day
         image.src = "img/question.png";
     }
-    return
+
+    // find which box is checked:
+   var unitBoxes = document.getElementsByName('unit')
+   for (let i=0; i<unitBoxes.length;i++){
+       if (unitBoxes[i].checked){
+           var unitChoice = unitBoxes[i].value;
+           break;
+       }
+   }
+
+    if (unitChoice=='days'){
+        let ans =  Math.floor(dateDiff.getTime()/MS_TO_DAYS)
+        extraS = (ans!=1)?('s'):('')
+        messageWriter('You are ' + ans +' day' + extraS + ' old!','#FFF')
+    }
+    else if (unitChoice=='years'){
+        let ans = dateDiff.getFullYear() - 1970
+        extraS = (ans!=1)?('s'):('')
+        messageWriter('You are ' + ans +  ' year'+ extraS +' old!','#FFF')
+    }
+
+    else { // user chose month
+        ans = 12*(dateDiff.getFullYear()-1970) + dateDiff.getMonth()
+        extraS = (ans!=1)?('s'):('')
+        messageWriter('You are ' + ans + ' month' + extraS +' old!','#FFF')
+    }
 
 }
 
