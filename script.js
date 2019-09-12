@@ -22,10 +22,12 @@ function calculateAge(form){
     var image = document.getElementById("cartoon")
     if ((dob.getMonth()==dateNow.getMonth()) && (dob.getDate()==dateNow.getDate())){ // birthday
         image.src = "img/birthday.png";
+        image.alt = "An image of a birthday cake"
     }
 
     else { // normal day
         image.src = "img/question.png";
+        image.alt = "An image of a question mark"
     }
 
     // find which box is checked:
@@ -53,7 +55,11 @@ function calculateAge(form){
         extraS = (ans!=1)?('s'):('')
         messageWriter('You are ' + ans + ' month' + extraS +' old!','#FFF')
     }
+    howLong(dob,dateNow)
 
+    return
+
+    
 }
 
 function messageWriter(str, col){
@@ -68,6 +74,43 @@ function messageWriter(str, col){
 
     if (col == '#F00'){
         image.src = "img/confused.png";
+        image.alt = "An image of a confused face"
     }
+    return
+}
+
+function howLong (dob,dateNow){
+    var addYear = 0
+    if ((dob.getMonth() < dateNow.getMonth()) || ((dob.getDate() < dateNow.getDate()) && (dob.getMonth() == dateNow.getMonth()))){
+        addYear = 1
+    }
+
+    var nextBday = new Date(dateNow.getFullYear() + addYear, dob.getMonth(), dob.getDate())
+
+    var daysUntilBday = Math.floor(new Date(nextBday.getTime() - dateNow.getTime()) / (1000 * 3600 * 24)) + 1 ;
+    
+    var lengthText = document.getElementById("lengthText")
+
+    if (lengthText.childNodes.length > 0 ){
+        lengthText.removeChild(lengthText.childNodes[0]);
+    }
+
+    var lengthSentence = ''
+
+    if (daysUntilBday == 0){
+        lengthSentence = 'It\'s your birthday! Woohoo'
+    }
+    else if (daysUntilBday < 31){
+        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' days! Not long!'
+    }
+    else if (daysUntilBday < 325){
+        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' days!' 
+    }
+    else {
+        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' days! So far away :('
+    }
+    console.log(lengthSentence);
+    var childText = document.createTextNode(lengthSentence);
+    lengthText.appendChild(childText);
     return
 }

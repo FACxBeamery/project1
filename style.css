@@ -29,6 +29,11 @@ img {
     display: block;
     margin: auto;
 }
+
+footer{
+    font-size:1vw;
+    text-align:center;
+}
 .container{
     display: flex;
     flex-direction: row;
@@ -62,15 +67,14 @@ input[type=text], select {
 input[type=radio] {
     width: 2.5vw;
     vertical-align: middle;
-    margin: 1vw 1vw 1vw 1vw;
 } 
 
 
 input[type=button] {
     width: 33vw;
     max-width: 200px;
-    background-color: rgb(52, 132, 179);
-    color: white;
+    background-color: #a8ffeb;
+    color: #333333;
     padding: 14px 20px;
     margin: 8px;
     border: none;
