@@ -8,14 +8,14 @@ function calculateAge(form){
     var dateNow = new Date();
 
     if ((dob.getFullYear() != year) || (dob.getMonth() != month - 1) || (dob.getDate() != day)){
-        messageWriter('Please enter a valid date!', '#F00');
+        messageWriter('Please enter a valid date!', true);
         return
     }
     
     var dateDiff = new Date(dateNow.getTime() - dob.getTime())
     console.log(dateDiff)
     if (dateDiff < 0){ // DOB in future
-        messageWriter('I don\'t believe you!', '#F00');
+        messageWriter('I don\'t believe you!', true);
         return 
     }
 
@@ -46,28 +46,28 @@ function calculateAge(form){
 
     if (unitChoice=='days'){
         let ans =  Math.floor(dateDiff.getTime()/MS_TO_DAYS)
-        extraS = (ans!=1)?('s'):('')
-        messageWriter('You are ' + ans +' day' + extraS + ' old!','#FFF')
+        successResponse(ans,unitChoice)
     }
     else if (unitChoice=='years'){
         let ans = dateDiff.getFullYear() - 1970
-        extraS = (ans!=1)?('s'):('')
-        messageWriter('You are ' + ans +  ' year'+ extraS +' old!','#FFF')
+        successResponse(ans, unitChoice)
     }
 
     else { // user chose month
         ans = 12*(dateDiff.getFullYear()-1970) + dateDiff.getMonth()
-        extraS = (ans!=1)?('s'):('')
-        messageWriter('You are ' + ans + ' month' + extraS +' old!','#FFF')
+        successResponse(ans, unitChoice)
     }
     howLong(dob,dateNow)
 
     return
-
-    
+}
+function successResponse(answer,unit) { // writes message to site if good input
+    extraS = (answer!=1)?('s'):('')
+    // remove extra s from unit (to be added later)
+    messageWriter('You are ' + answer + ' ' + unit.slice(0,-1) + extraS + ' old!',false)
 }
 
-function messageWriter(str, col){
+function messageWriter(str, error){
     var images = document.getElementsByClassName("cartoon")
     var output = document.getElementById("output");
     if (output.childNodes.length > 0 ){
@@ -75,12 +75,20 @@ function messageWriter(str, col){
     }
     var outputText = document.createTextNode(str);
     output.appendChild(outputText);
-    output.style.color = col
+    output.style.color = '#FFF'
 
-    if (col == '#F00'){
+    if (error){
+        output.style.color = '#F00'
         for (var i = 0; i < images.length; i++){
-            images[i].src = "img/confused.png";
+            images[i].src = "img/confused.svg";
             images[i].alt = "An image of a confused face"
+        }
+
+        var lengthText = document.getElementById("lengthText")
+
+        if (lengthText.childNodes.length > 0 ){
+            lengthText.removeChild(lengthText.childNodes[0]);
+        
         }
     }
     return
@@ -103,12 +111,13 @@ function howLong (dob,dateNow){
     }
 
     var lengthSentence = ''
-
+    
     if (daysUntilBday == 0){
         lengthSentence = 'It\'s your birthday! Woohoo'
     }
     else if (daysUntilBday < 31){
-        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' days! Not long!'
+        extraS = (daysUntilBday!=1)?('s'):('')
+        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' day' + extraS + '! Not long!'
     }
     else if (daysUntilBday < 325){
         lengthSentence = 'It is your birthday in ' + daysUntilBday + ' days!' 
