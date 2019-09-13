@@ -2,11 +2,12 @@
 Website created for week 1 of FAC training
 Available here: https://facxbeamery.github.io/project1/
 
+![screenshot of site](site_screenshot.png)
+
 ## Motivation
 The purpose of this project was to put the knowledge we had gained in the Monday and Tuesday sessions into practice. 
 This week it was important that our project demonstrated understanding of git, responsive design, accessibilty, and DOM manipulation.
 
-![screenshot of site](site_screenshot.png)
 
 ## User Journey
 
@@ -22,7 +23,7 @@ As a user I want to find out my age in a variety of units based on my birthdate,
 * As a user with limited vision, I want the website to be accessible so if I'm using a screenreader I get the same experience of the website as others
 
 
-### Bugs/Improvements
+## Bugs/Improvements
 * Would be better if there was no need to click submit, and output automatically updates when input fields are changed
 * Site could be more aesthetically pleasing
 * Some smooth animations on the site could improve the user experience 
