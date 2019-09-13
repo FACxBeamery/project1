@@ -41,7 +41,7 @@ header {
 }
 
 footer{
-    position:absolute;
+    position:fixed;
     font-size:1vw;
     text-align:center;
     bottom: 5px;
