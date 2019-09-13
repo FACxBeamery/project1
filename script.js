@@ -1,9 +1,10 @@
-const MS_TO_DAYS = 1000 * 60 * 60 * 24
+const MS_TO_DAYS = 1000 * 60 * 60 * 24 // convert milliseconds to days 
 function calculateAge(form){
     var day = form.day.value;
     var month = form.month.value;
     var year = form.year.value;
 
+    // Date() object zero indexes months so take one off
     var dob = new Date(year, month -1, day); 
     var dateNow = new Date();
 
@@ -20,10 +21,10 @@ function calculateAge(form){
     }
 
     var images = document.getElementsByClassName("cartoon")
-    if ((dob.getMonth()==dateNow.getMonth()) && (dob.getDate()==dateNow.getDate())){ // birthday
+    if ((dob.getMonth()===dateNow.getMonth()) && (dob.getDate()===dateNow.getDate())){ // birthday
         for (var i = 0; i < images.length; i++){
             images[i].src = "img/birthday.svg";
-            images[i].alt = "An image of a birthday cake"
+            images[i].alt = "a birthday cake";
         }
 
     }
@@ -31,7 +32,7 @@ function calculateAge(form){
     else { // normal day
         for (var i = 0; i < images.length; i++){
             images[i].src = "img/question.svg";
-            images[i].alt = "An image of a question mark"
+            images[i].alt = "a question mark";
         }
     }
 
@@ -44,31 +45,27 @@ function calculateAge(form){
        }
    }
 
-    if (unitChoice=='days'){
-        let ans =  Math.floor(dateDiff.getTime()/MS_TO_DAYS)
-        successResponse(ans,unitChoice)
+    if (unitChoice==='days'){
+        var ans =  Math.floor(dateDiff.getTime()/MS_TO_DAYS);
     }
-    else if (unitChoice=='years'){
-        let ans = dateDiff.getFullYear() - 1970
-        successResponse(ans, unitChoice)
+    else if (unitChoice==='years'){
+        var ans = dateDiff.getFullYear() - 1970;
+    }
+    else { // user chose month
+       var ans = 12*(dateDiff.getFullYear()-1970) + dateDiff.getMonth();
     }
 
-    else { // user chose month
-        ans = 12*(dateDiff.getFullYear()-1970) + dateDiff.getMonth()
-        successResponse(ans, unitChoice)
-    }
+    messageWriter(`You are ${ans} ` + unitChoice.slice(0,-1) + `${(ans!==1)?('s'):('')} old!`,false);
     howLong(dob,dateNow)
 
     return
 }
 function successResponse(answer,unit) { // writes message to site if good input
-    extraS = (answer!=1)?('s'):('')
-    // remove extra s from unit (to be added later)
-    messageWriter('You are ' + answer + ' ' + unit.slice(0,-1) + extraS + ' old!',false)
+    
 }
 
 function messageWriter(str, error){
-    var images = document.getElementsByClassName("cartoon")
+    var images = document.getElementsByClassName("cartoon");
     var output = document.getElementById("output");
     if (output.childNodes.length > 0 ){
         output.removeChild(output.childNodes[0]);
@@ -81,10 +78,10 @@ function messageWriter(str, error){
         output.style.color = '#F00'
         for (var i = 0; i < images.length; i++){
             images[i].src = "img/confused.svg";
-            images[i].alt = "An image of a confused face"
+            images[i].alt = "a confused face";
         }
 
-        var lengthText = document.getElementById("lengthText")
+        var lengthText = document.getElementById("lengthText");
 
         if (lengthText.childNodes.length > 0 ){
             lengthText.removeChild(lengthText.childNodes[0]);
@@ -95,35 +92,35 @@ function messageWriter(str, error){
 }
 
 function howLong (dob,dateNow){
-    var addYear = 0
-    if ((dob.getMonth() < dateNow.getMonth()) || ((dob.getDate() < dateNow.getDate()) && (dob.getMonth() == dateNow.getMonth()))){
-        addYear = 1
+    var addYear = 0;
+    if ((dob.getMonth() < dateNow.getMonth()) || ((dob.getDate() < dateNow.getDate()) && (dob.getMonth() === dateNow.getMonth()))){
+        addYear = 1;
     }
 
-    var nextBday = new Date(dateNow.getFullYear() + addYear, dob.getMonth(), dob.getDate())
+    var nextBday = new Date(dateNow.getFullYear() + addYear, dob.getMonth(), dob.getDate());
 
     var daysUntilBday = Math.floor(new Date(nextBday.getTime() - dateNow.getTime()) / (1000 * 3600 * 24)) + 1 ;
     
-    var lengthText = document.getElementById("lengthText")
+    var lengthText = document.getElementById("lengthText");
 
     if (lengthText.childNodes.length > 0 ){
         lengthText.removeChild(lengthText.childNodes[0]);
     }
 
-    var lengthSentence = ''
+    var lengthSentence = '';
     
-    if (daysUntilBday == 0){
-        lengthSentence = 'It\'s your birthday! Woohoo'
+    if (daysUntilBday === 0){
+        lengthSentence = 'It\'s your birthday! Woohoo';
     }
     else if (daysUntilBday < 31){
-        extraS = (daysUntilBday!=1)?('s'):('')
-        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' day' + extraS + '! Not long!'
+        extraS = (daysUntilBday!==1)?('s'):('');
+        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' day' + extraS + '! Not long!';
     }
     else if (daysUntilBday < 325){
-        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' days!' 
+        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' days!' ;
     }
     else {
-        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' days! So far away :('
+        lengthSentence = 'It is your birthday in ' + daysUntilBday + ' days! So far away :(';
     }
     console.log(lengthSentence);
     var childText = document.createTextNode(lengthSentence);
