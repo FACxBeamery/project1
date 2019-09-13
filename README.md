@@ -1,5 +1,6 @@
 # Project 1 Website: Tom Galligan and Martha Lambert
-Website created for week 1 of FAC training //
+Website created for week 1 of FAC training 
+
 Available here: https://facxbeamery.github.io/project1/
 
 ![screenshot of site](site_screenshot.png)
