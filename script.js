@@ -72,10 +72,11 @@ function messageWriter(str, error){
     }
     var outputText = document.createTextNode(str);
     output.appendChild(outputText);
-    output.style.color = '#FFF'
+    output.style.color = '#FFF';
 
     if (error){
-        output.style.color = '#F00'
+        output.style.backgroundColor = '#F00';
+        output.style.borderRadius = '1vw';
         for (var i = 0; i < images.length; i++){
             images[i].src = "img/confused.svg";
             images[i].alt = "a confused face";
