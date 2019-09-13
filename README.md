@@ -1,5 +1,5 @@
 # Project 1 Website: Tom Galligan and Martha Lambert
-Website created for week 1 of FAC training
+Website created for week 1 of FAC training //
 Available here: https://facxbeamery.github.io/project1/
 
 ![screenshot of site](site_screenshot.png)
@@ -27,5 +27,3 @@ As a user I want to find out my age in a variety of units based on my birthdate,
 * Would be better if there was no need to click submit, and output automatically updates when input fields are changed
 * Site could be more aesthetically pleasing
 * Some smooth animations on the site could improve the user experience 
-
-Website is available here: https://facxbeamery.github.io/project1/
